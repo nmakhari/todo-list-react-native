@@ -1,12 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Header from './components/header.js';
 
 export default function App() {
+
+  const [tasks, setTasks] = useState([
+    {text: 'test task', key: '1'}
+  ]);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Header/>
+      <View> 
+        {/* input here */}
+      </View>
+
+      <View>
+        {/* list here */}
+      </View>
+
     </View>
   );
 }
@@ -14,8 +26,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: 'white'
+  }
 });
