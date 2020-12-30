@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     },
     newTodo: {
         paddingBottom: 15,
-        marginBottom: 5,
+        marginBottom: 10,
         textAlign: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'black'
+        borderBottomWidth: 2,
+        borderBottomColor: 'grey'
     }
 });

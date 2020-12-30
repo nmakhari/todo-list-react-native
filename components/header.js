@@ -21,6 +21,7 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 40,
         padding: 20,
-        fontFamily: 'Roboto' // necessary for one plus and other OS which cannot handle the bold text correctly
+        fontFamily: 'Roboto', // necessary for one plus and other OS which cannot handle the bold text correctly
+        color: 'white'
     }
 });

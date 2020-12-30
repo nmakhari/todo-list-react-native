@@ -1,25 +1,26 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/Header.js';
 import NewItem from './components/NewItem.js';
 import ListItem from './components/ListItem.js'
 
-var currentKeyMax = 1;
+var currentKeyMax = 1; // to generate unique keys within a reasonable list size
 
 export default function App() {
 
   const [tasks, setTasks] = useState([]);
 
   const addTask = (input) => {
+    if (input.length > 0) {
+      currentKeyMax++;
 
-    currentKeyMax++;
-
-    setTasks([
-      {text: input, key: (currentKeyMax + 1).toString()},
-      ...tasks
-    ]);
-
-    // currentKeyMax = currentKeyMax + 1;
+      setTasks([
+        {text: input, key: currentKeyMax.toString()},
+        ...tasks
+      ]);
+    } else {
+      Alert.alert('Error!', 'Cannot create a blank task', [{text: 'OK', onPress: () => console.log('ok pressed')}]);
+    }
   }
 
   const removeItem = (key) => {
@@ -27,20 +28,28 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header/>
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}>
 
-      <NewItem submitItem={addTask}/>
-      <View>
-        <FlatList
-          style={styles.list}
-          data={tasks}
-          renderItem={({item}) => (
-            <ListItem task={item} completionHandler={removeItem} />
-          )} />
+      <View style={styles.container}>
+
+        <Header/>
+
+        <View style={styles.content}>
+          <NewItem submitItem={addTask}/>
+
+          <FlatList
+            style={styles.list}
+            data={tasks}
+            renderItem={({item}) => (
+              <ListItem task={item} completionHandler={removeItem} />
+            )} />
+
+        </View>
+
       </View>
 
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -49,7 +58,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
+  content: {
+    padding: 20,
+    flex: 1,
+  },
   list: {
-    padding: 15
+    flex: 1,
   }
 });
