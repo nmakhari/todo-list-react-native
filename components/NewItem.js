@@ -17,7 +17,7 @@ export default itemForm = ({submitItem}) => {
                 onChangeText={updateHandler} />
 
             <Button
-                color={'blue'}
+                color={'grey'}
                 title={'Add Item'}
                 onPress={() => submitItem(text)} />
         </View>
